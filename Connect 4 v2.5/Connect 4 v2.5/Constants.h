@@ -20,5 +20,7 @@ const int NO_MOVE = -1;
 void initSearchConstants();
 uint64_t randomGenerator();
 void DrawBoard(Position& inputBoard);
+void PerftTest();
+uint64_t perft(int depth, Position& inputBoard);
 
 #endif

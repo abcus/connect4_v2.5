@@ -3,7 +3,7 @@
 #include "Position.h"
 #include "Constants.h"
 	
-	Position::Position() {
+	Position::Position(std::string inputString) {
 		nPlies = 0;
 		key = 0x1ULL;
 		arrayOfBitboard[0] = arrayOfBitboard[1] = 0x0ULL; 
@@ -13,10 +13,6 @@
 		for (int i = 0; i < 7; i++) {
             height[i] = 7*i;
         }
-		
-		std::cout << "Enter position to solve: " << std::endl;
-		std::string inputString;
-		getline(std::cin, inputString);
 		if (inputString.empty() == false) {
 			for (int i = 0; i < inputString.size(); i++) {
 				MakeMove(height[inputString[i] - '1']);

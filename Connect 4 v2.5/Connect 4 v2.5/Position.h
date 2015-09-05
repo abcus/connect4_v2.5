@@ -6,7 +6,7 @@
 class Position {
 
 	public:
-		Position();
+		Position(std::string inputString);
 		int get_nPlies();
 		uint64_t get_arrayOfBitboard(int colour);
 		int get_moveHistory(int ply);

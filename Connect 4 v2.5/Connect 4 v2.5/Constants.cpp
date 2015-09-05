@@ -1,5 +1,7 @@
 ﻿#include <iostream>
 #include <string>
+#include <chrono>
+#include <ctime>
 #include "Constants.h"
 #include "Position.h"
 
@@ -54,6 +56,42 @@ void DrawBoard(Position& inputBoard) {
         std::cout<< "" << std::endl;
         std::cout << "Key: " << inputBoard.get_key() << std::endl;
         std::cout << std::endl;
+}
+
+void PerftTest() {
+	for (int i=1; i < 14; i++) {
+		Position test("");
+		std::chrono::time_point<std::chrono::system_clock> start, end;
+		start = std::chrono::system_clock::now();
+		uint64_t nodeCount = perft(i, test);
+		end = std::chrono::system_clock::now();
+		std::chrono::duration<double> elapsed_seconds = end - start;
+		uint64_t elapsed_milliseconds = (elapsed_seconds.count() * 1000) + 1;
+		std::cout.imbue(std::locale(""));
+		std::cout << "Depth: " << i << "\t\tNodes: " << nodeCount << "\t\tTime: " << elapsed_milliseconds << "\t\tNPS: " << nodeCount/elapsed_milliseconds * 1000 << std::endl;
+	}
+}
+
+uint64_t perft (int depth, Position& inputBoard) {
+	uint64_t nodes = 0;
+    if (inputBoard.HasWon(inputBoard.get_arrayOfBitboard((inputBoard.get_nPlies()-1) & 1)) || inputBoard.get_nPlies() == 42) {
+        return 1;
+    } else if (depth == 1) {
+        for (int i = 0; i < 7; i++) {
+            if (inputBoard.get_height(i) - 7 * i <= 5) {
+                nodes++;
+            }
+        }
+        return nodes;
+    }
+	for (int i = 0; i < 7; i++) {
+        if (inputBoard.get_height(i) - 7 * i <= 5) {
+            inputBoard.MakeMove(inputBoard.get_height(i));
+            nodes += perft(depth - 1, inputBoard);
+            inputBoard.UnmakeMove();
+        }
+    }
+	return nodes;
 }
 
 
