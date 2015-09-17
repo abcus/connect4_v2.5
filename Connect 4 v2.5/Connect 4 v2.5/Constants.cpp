@@ -4,8 +4,10 @@
 #include <ctime>
 #include "Constants.h"
 #include "Position.h"
+#include "TTable.h"
 
 uint64_t pieceZobrist[2][49];
+struct TTEntry EMPTY_ENTRY = {0, 0, 0, 0, -1};
 
 void initSearchConstants() {
 	for (int i = 0; i < 2; i++) {
@@ -59,7 +61,7 @@ void DrawBoard(Position& inputBoard) {
 }
 
 void PerftTest() {
-	for (int i=1; i < 14; i++) {
+	for (int i=1; i < 42; i++) {
 		Position test("");
 		std::chrono::time_point<std::chrono::system_clock> start, end;
 		start = std::chrono::system_clock::now();

@@ -1,9 +1,8 @@
-﻿Build started 9/5/2015 5:11:56 PM.
+﻿Build started 9/17/2015 6:34:49 PM.
      1>Project "C:\Users\Kevin\Documents\C++projects\Connect4v2.5\connect4_v2.5\Connect 4 v2.5\Connect 4 v2.5\Connect 4 v2.5.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\CL.exe /c /Zi /nologo /W3 /WX- /Ox /Ob2 /Oi /Ot /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Release\\" /Fd"x64\Release\vc110.pdb" /Gd /TP /errorReport:prompt Constants.cpp
-         Constants.cpp
-     1>Constants.cpp(69): warning C4244: 'initializing' : conversion from 'double' to 'uint64_t', possible loss of data
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Ob2 /Oi /Ot /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /Zc:wchar_t /Zc:forScope /Fo"x64\Release\\" /Fd"x64\Release\vc110.pdb" /Gd /TP /errorReport:prompt Solve.cpp
+         Solve.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Kevin\Documents\C++projects\Connect4v2.5\connect4_v2.5\Connect 4 v2.5\x64\Release\Connect 4 v2.5.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Kevin\Documents\C++projects\Connect4v2.5\connect4_v2.5\Connect 4 v2.5\x64\Release\Connect 4 v2.5.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Kevin\Documents\C++projects\Connect4v2.5\connect4_v2.5\Connect 4 v2.5\x64\Release\Connect 4 v2.5.lib" /MACHINE:X64 x64\Release\Constants.obj
          x64\Release\main.obj
@@ -17,4 +16,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.13
+Time Elapsed 00:00:00.85
