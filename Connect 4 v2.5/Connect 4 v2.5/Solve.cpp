@@ -32,41 +32,84 @@ int Solve (int nodeType, Position& board, int ply, int alpha, int beta, int dept
 	}
 
 	int hashMove = (entry.flag == L_BOUND && entry.evaluationScore < beta) ? entry.move : NO_MOVE;
+	
+	
+
 	int bestScore = -INF;
 	int movesMade = 0;
 	bool raisedAlpha = false;
-
-
-	return -70;
-
-	/*
-	Position testP("");
-	MovePicker test(testP, 2, 2);
-	std:: cout << test.getNextMove() << std::endl;
-	std:: cout << test.getNextMove() << std::endl;
-	std:: cout << test.getNextMove() << std::endl;
-	std:: cout << test.getNextMove() << std::endl;
-	std:: cout << test.getNextMove() << std::endl;
-	std:: cout << test.getNextMove() << std::endl;
-	std:: cout << test.getNextMove() << std::endl;
-	std:: cout << test.getNextMove() << std::endl;
-	*/
+	MovePicker mPicker(board, ply, hashMove);
+	int bestMove = NO_MOVE;
 	
+	for (int i=0; i < 7; i++) {
+			
+		int move = NO_MOVE;
+		if (board.get_height(i) - 7 * i <= 5) {
+			move = board.get_height(i);
+		}
+		if (move == NO_MOVE) {
+			continue;
+		}
 
-	//TTable test;
-	//TTEntry testEntry = {343434, 99, 100, 101, 102};
-	//test.storeTTable(343434, testEntry);
-	//TTEntry test2Entry = {343434, 30, 31, 32, 33};
-	//test.storeTTable(343434, test2Entry);
-	//TTEntry probe = test.probeTTable(343434);
+		//int move = mPicker.getNextMove();
+		
+		//if (move == NO_MOVE) {
+			//break;
+		//}
+
+		board.MakeMove(move);
+		int score = -Solve(NON_ROOT, board, ply + 1, -beta, -alpha, depth - 1);
+		board.UnmakeMove();
+		nodesVisited++;
+		movesMade++;
+
+		if (score >= beta) {
+			TTEntry newEntry = {board.get_key(), L_BOUND, depth, score, move};
+			TranspositionTable.storeTTable(board.get_key(), newEntry);
+			//updateKillers(move, ply);
+			//updateHistory(depth, ply, move);
+
+			if (movesMade == 1) {
+				fh1++;
+			} else {
+				fh++;
+			}
+			return score;
+		} else if (score > bestScore) {
+			bestScore = score;
+			bestMove = move;
+			if (score > alpha) {
+				alpha = score;
+				raisedAlpha = true;
+			}
+		}
+		 
+	}
+
+	if (raisedAlpha) {
+		TTEntry newEntry = {board.get_key(), EXACT, depth, alpha, bestMove};
+		TranspositionTable.storeTTable(board.get_key(), newEntry);
+	} else {
+		TTEntry newEntry = {board.get_key(), U_BOUND, depth, bestScore, NO_MOVE};
+		TranspositionTable.storeTTable(board.get_key(), newEntry);
+	}
+	return bestScore;
 }
 
 void updateKillers (int move, int ply) {
-
+	if (move != killerTable[ply][0] && move != NO_MOVE) {
+		killerTable[ply][1] = killerTable[ply][0];
+		killerTable[ply][0] = move;
+	}
 }
 
 void updateHistory (int depth, int ply, int move) {
-
+	historyTable[ply & 1][move] += depth;
+	if (historyTable[ply & 1][move] > 100000000) {
+		for (int i = 0; i < 49; i++) {
+			historyTable[ply & 1][i] /= 2;
+		}
+	}
 }
 
 MovePicker::MovePicker(Position& inputBoard, int ply, int hashMove) 
@@ -75,8 +118,6 @@ MovePicker::MovePicker(Position& inputBoard, int ply, int hashMove)
 	numberOfMoves = moveIndex = 0;
 	this->ply = ply;
 	this->hashMove = hashMove;
-	board.MakeMove(21);
-	DrawBoard(board);
 	moveList = moveGenerator();
 }
 
@@ -90,8 +131,12 @@ Move* MovePicker::moveGenerator() {
 			if (hashMove != NO_MOVE && lowestFreeInCol == hashMove) {
 				score += HASH_MOVE_SCORE;
 			}
-			//killers
-			//history
+			if (lowestFreeInCol == killerTable[ply][0]) {
+				score += KILLER_0_SCORE;
+			} else if (lowestFreeInCol == killerTable[ply][1]) {
+				score += KILLER_1_SCORE;
+			}
+			score += historyTable[ply & 1][lowestFreeInCol];
 
 			moveList[i].move = lowestFreeInCol;
 			moveList[i].score = score;
