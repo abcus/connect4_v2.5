@@ -12,13 +12,7 @@ int historyTable [2][49];
 uint64_t nodesVisited = 0;
 
 int Solve (int nodeType, Position& board, int ply, int alpha, int beta, int depth) {
-	
-	if (board.HasWon(board.get_arrayOfBitboard((board.get_nPlies() - 1) & 1))) {
-		return -WIN + ply;
-	} else if (board.get_nPlies() == 42) {
-		return DRAW;
-	}
-	
+
 	TTEntry entry = TranspositionTable.probeTTable(board.get_key());
 
 	if (entry.flag == EXACT
@@ -34,11 +28,11 @@ int Solve (int nodeType, Position& board, int ply, int alpha, int beta, int dept
 	int hashMove = (entry.flag == L_BOUND && entry.evaluationScore < beta) ? entry.move : NO_MOVE;
 	
 	
-
+	int score = 0;
 	int bestScore = -INF;
 	int movesMade = 0;
 	bool raisedAlpha = false;
-	MovePicker mPicker(board, ply, hashMove);
+	//MovePicker mPicker(board, ply, hashMove);
 	int bestMove = NO_MOVE;
 	
 	for (int i=0; i < 7; i++) {
@@ -58,7 +52,13 @@ int Solve (int nodeType, Position& board, int ply, int alpha, int beta, int dept
 		//}
 
 		board.MakeMove(move);
-		int score = -Solve(NON_ROOT, board, ply + 1, -beta, -alpha, depth - 1);
+		if (board.HasWon(board.get_arrayOfBitboard((board.get_nPlies() - 1) & 1))) {
+			score = WIN - ply - 1;
+		} else if (board.get_nPlies() == 42) {
+			score = DRAW;
+		} else {
+			score = -Solve(NON_ROOT, board, ply + 1, -beta, -alpha, depth - 1);
+		}
 		board.UnmakeMove();
 		nodesVisited++;
 		movesMade++;
@@ -82,8 +82,7 @@ int Solve (int nodeType, Position& board, int ply, int alpha, int beta, int dept
 				alpha = score;
 				raisedAlpha = true;
 			}
-		}
-		 
+		} 
 	}
 
 	if (raisedAlpha) {
@@ -93,7 +92,12 @@ int Solve (int nodeType, Position& board, int ply, int alpha, int beta, int dept
 		TTEntry newEntry = {board.get_key(), U_BOUND, depth, bestScore, NO_MOVE};
 		TranspositionTable.storeTTable(board.get_key(), newEntry);
 	}
-	return bestScore;
+	
+	return bestScore; 
+}
+
+int get_PV_Move(uint64_t key) {
+	return TranspositionTable.probeTTable(key).move;
 }
 
 void updateKillers (int move, int ply) {
@@ -115,16 +119,17 @@ void updateHistory (int depth, int ply, int move) {
 MovePicker::MovePicker(Position& inputBoard, int ply, int hashMove) 
 	:board(inputBoard)
 {
+	
 	numberOfMoves = moveIndex = 0;
 	this->ply = ply;
 	this->hashMove = hashMove;
-	moveList = moveGenerator();
+	//moveList = moveGenerator();
 }
 
-Move* MovePicker::moveGenerator() {
+/*Move* MovePicker::moveGenerator() {
 	static Move moveList [7]; 
 	
-	for (int i = 0; i < 7; i++) {
+	for (int i = 6; i >= 0; i--) {
 		int lowestFreeInCol = board.get_height(i);
 		if (lowestFreeInCol - 7 * i <= 5) {
 			int score = (CENTRAL_COLUMN_SCORE - DISTANCE_PENALTY * abs(i - 3));
@@ -138,17 +143,27 @@ Move* MovePicker::moveGenerator() {
 			}
 			score += historyTable[ply & 1][lowestFreeInCol];
 
-			moveList[i].move = lowestFreeInCol;
-			moveList[i].score = score;
+			moveList[numberOfMoves].move = lowestFreeInCol;
+			moveList[numberOfMoves].score = score;
 			numberOfMoves ++;
 		}
 	}
 	return moveList;
-}
+}*/
 
 int MovePicker::getNextMove() {
 	
-	while (moveIndex < numberOfMoves) {
+	for (int i = moveIndex; i < 7; i++) {
+		int lowestFreeInCol = board.get_height(i);
+		if (lowestFreeInCol - 7 * i <= 5) {
+			moveIndex ++;
+			return lowestFreeInCol;
+		}
+		moveIndex++;
+	}
+	return NO_MOVE;
+
+	/*while (moveIndex < numberOfMoves) {
 
 		int maxScore = -INF;
         int maxPosition = -1;
@@ -162,12 +177,12 @@ int MovePicker::getNextMove() {
         Move moveTemp = moveList[moveIndex];
         moveList[moveIndex] = moveList[maxPosition];
         moveList[maxPosition] = moveTemp;
-
+		
         int move = (moveList[moveIndex].move);
                     
         moveIndex++;
 		return move;   
 	}
-    return NO_MOVE;
+    return NO_MOVE;*/
 }
 

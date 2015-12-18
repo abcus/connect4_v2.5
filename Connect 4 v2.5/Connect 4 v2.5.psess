@@ -74,6 +74,12 @@
     <Report>
       <Path>Connect 4 v2.5150905(1).vsp</Path>
     </Report>
+    <Report>
+      <Path>Connect 4 v2.5150917.vsp</Path>
+    </Report>
+    <Report>
+      <Path>Connect 4 v2.5150917(1).vsp</Path>
+    </Report>
   </Reports>
   <Launches>
     <ProjBinary>

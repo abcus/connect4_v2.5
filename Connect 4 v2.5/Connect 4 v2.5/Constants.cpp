@@ -6,6 +6,7 @@
 #include "Position.h"
 #include "TTable.h"
 
+
 uint64_t pieceZobrist[2][49];
 struct TTEntry EMPTY_ENTRY = {0, 0, 0, 0, -1};
 
@@ -86,12 +87,24 @@ uint64_t perft (int depth, Position& inputBoard) {
         }
         return nodes;
     }
+
+	MovePicker mPicker(inputBoard, 0, 0);
+
 	for (int i = 0; i < 7; i++) {
-        if (inputBoard.get_height(i) - 7 * i <= 5) {
+
+		int move = mPicker.getNextMove();
+			if (move == NO_MOVE) {
+			break;
+		}
+		inputBoard.MakeMove(move);
+			nodes += perft(depth - 1, inputBoard);
+		inputBoard.UnmakeMove();
+
+        /*if (inputBoard.get_height(i) - 7 * i <= 5) {
             inputBoard.MakeMove(inputBoard.get_height(i));
             nodes += perft(depth - 1, inputBoard);
             inputBoard.UnmakeMove();
-        }
+        }*/
     }
 	return nodes;
 }

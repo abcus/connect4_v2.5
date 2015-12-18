@@ -5,7 +5,7 @@
 #include "TTable.h"
 
 TTable::TTable() {
-	 transpositionTable = new TTEntry[TT_SIZE + BUCKET_SIZE];
+	 transpositionTable = new TTEntry[TT_SIZE + BUCKET_SIZE]();
 }
 
 void TTable::storeTTable(uint64_t key, TTEntry entry) {

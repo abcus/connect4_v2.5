@@ -133,6 +133,7 @@
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <GenerateAlternateCodePaths>SSE41</GenerateAlternateCodePaths>
       <UseProcessorExtensions>SSE41</UseProcessorExtensions>
+      <Optimization>Full</Optimization>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

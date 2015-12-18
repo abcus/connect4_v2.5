@@ -2,6 +2,7 @@
 #define SOLVE_H
 
 int Solve (int nodeType, Position& board, int ply, int alpha, int beta, int depth);
+int get_PV_Move(uint64_t key);
 void updateKillers (int move, int ply);
 void updateHistory (int depth, int ply, int move);
 

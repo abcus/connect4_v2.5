@@ -13,8 +13,8 @@ static void InitializeSearch();
 int main() {
 	
 	initSearchConstants();
-	//PerftTest();
-	InitializeSearch();
+	PerftTest();
+	//InitializeSearch();
 
 	return 0;
 }
@@ -37,12 +37,11 @@ static void InitializeSearch() {
 	} else {
 		std::cout <<"loss in " << (WIN + evaluation);
 	}
-	std::cout << std::endl;
-	//std::cout << ("\t\tBest move: Column " + (Solve.TranspositionTable.probeTTable(test.key).move/ 7 + 1)) std::endl;
+	std::cout << "\t\tBest move: Column " << (get_PV_Move(board.get_key())/ 7 + 1) << std::endl;
 	end = std::chrono::system_clock::now();
 	std::chrono::duration<double> elapsed_seconds = end - start;
 	uint64_t elapsed_milliseconds = (elapsed_seconds.count() * 1000) + 1;
 	std::cout.imbue(std::locale(""));
-	std::cout << "Nodes: " << nodesVisited << "\t\tTime: " << elapsed_milliseconds << " milliseconds\t\tNPS: " << nodesVisited/((elapsed_milliseconds + 1) * 1000) << std::endl;
+	std::cout << "Nodes: " << nodesVisited << "\t\tTime: " << elapsed_milliseconds << " milliseconds\t\tNPS: " << (nodesVisited/(elapsed_milliseconds + 1)) * 1000 << std::endl;
 	std::cout << "FH1: " << (fh1 / (fh1 + fh)) * 100 << std::endl;
 }
