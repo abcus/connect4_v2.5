@@ -3,7 +3,6 @@
 
 #include <cstdint>
 #include "Position.h"
-#include "Solve.h"
 
 const int WIDTH = 7, HEIGHT = 6, H1 = 7, H2 = 8, SIZE = 42, SIZE1 = 49;
 const uint64_t ALL1 = 0x1FFFFFFFFFFFF, COL1 = 0x7F, BOTTOM = 0x40810204081, TOP = 0x1020408102040, ALL = ALL1 ^ TOP;
@@ -22,6 +21,7 @@ void initSearchConstants();
 uint64_t randomGenerator();
 void DrawBoard(Position& inputBoard);
 void PerftTest();
+void PerftDivide();
 uint64_t perft(int depth, Position& inputBoard);
 
 #endif
