@@ -133,8 +133,8 @@
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <GenerateAlternateCodePaths>SSE41</GenerateAlternateCodePaths>
       <UseProcessorExtensions>SSE41</UseProcessorExtensions>
-      <Optimization>MaxSpeedHighLevel</Optimization>
       <BrowseInformation>true</BrowseInformation>
+      <Optimization>MaxSpeedHighLevel</Optimization>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

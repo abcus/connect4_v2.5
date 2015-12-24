@@ -13,7 +13,7 @@ const int TT_SIZE = 15485867, BUCKET_SIZE = 4;
 const int EXACT = 1, L_BOUND = 2, U_BOUND = 3;
 const int ROOT = 1, NON_ROOT = 2;
 extern struct TTEntry EMPTY_ENTRY;
-const int CENTRAL_COLUMN_SCORE = 400000000, DISTANCE_PENALTY = 100000000;
+extern int positionScore[7];
 static int KILLER_0_SCORE = 100000000, KILLER_1_SCORE = 80000000, HASH_MOVE_SCORE = 500000000;
 const int NO_MOVE = -1;
 

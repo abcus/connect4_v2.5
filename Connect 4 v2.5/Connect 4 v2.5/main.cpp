@@ -13,7 +13,7 @@ static void InitializeSearch();
 int main() {
 	
 	initSearchConstants();
-	//PerftTest();
+	//PerftTest();-+
 	InitializeSearch();
 	return 0;
 }

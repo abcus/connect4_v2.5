@@ -1,6 +1,13 @@
-﻿Build started 12/23/2015 8:58:05 PM.
+﻿Build started 12/24/2015 2:17:55 AM.
      1>Project "C:\Users\Kevin\Documents\C++projects\Connect4v2.5\connect4_v2.5\Connect 4 v2.5\Connect 4 v2.5\Connect 4 v2.5.vcxproj" on node 2 (Build target(s)).
-     1>Link:
+     1>ClCompile:
+         C:\Program Files (x86)\Intel\Composer XE 2015\bin\Intel64\icl.exe /c /Qvc11 /Qlocation,link,"C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\amd64" /Zi /nologo /W3 /O3 /Ob2 /Oi /Ot /Qipo /Qftz- /D __INTEL_COMPILER=1500 /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /EHsc /MD /GS /Gy /QaxSSE4.1 /QxSSE4.1 /Zc:wchar_t /Zc:forScope /Fo"x64\Release\\" /Fd"x64\Release\vc110.pdb" /FR"x64\Release\\" /TP Constants.cpp Position.cpp Solve.cpp TTable.cpp main.cpp
+         Constants.cpp
+         Position.cpp
+         Solve.cpp
+         TTable.cpp
+         main.cpp
+       Link:
          C:\Program Files (x86)\Intel\Composer XE 2015\bin\Intel64\xilink.exe /OUT:"C:\Users\Kevin\Documents\C++projects\Connect4v2.5\connect4_v2.5\Connect 4 v2.5\x64\Release\Connect 4 v2.5.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"x64\Release\Connect 4 v2.5.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Kevin\Documents\C++projects\Connect4v2.5\connect4_v2.5\Connect 4 v2.5\x64\Release\Connect 4 v2.5.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Kevin\Documents\C++projects\Connect4v2.5\connect4_v2.5\Connect 4 v2.5\x64\Release\Connect 4 v2.5.lib" /MACHINE:X64 x64\Release\Constants.obj
          x64\Release\main.obj
          x64\Release\Position.obj
@@ -8,8 +15,10 @@
          x64\Release\TTable.obj
          xilink: executing 'link'
          Connect 4 v2.5.vcxproj -> C:\Users\Kevin\Documents\C++projects\Connect4v2.5\connect4_v2.5\Connect 4 v2.5\x64\Release\Connect 4 v2.5.exe
+       BscMake:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\AMD64\bscmake.exe /nologo /o"C:\Users\Kevin\Documents\C++projects\Connect4v2.5\connect4_v2.5\Connect 4 v2.5\x64\Release\Connect 4 v2.5.bsc" /n x64\Release\Constants.sbr x64\Release\main.sbr x64\Release\Position.sbr x64\Release\Solve.sbr x64\Release\TTable.sbr
      1>Done Building Project "C:\Users\Kevin\Documents\C++projects\Connect4v2.5\connect4_v2.5\Connect 4 v2.5\Connect 4 v2.5\Connect 4 v2.5.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:01.42
+Time Elapsed 00:00:03.65

@@ -28,7 +28,7 @@ int Solve (int nodeType, Position& board, int ply, int alpha, int beta, int dept
 	}
 
 	TTEntry entry = TranspositionTable.probeTTable(board.get_key());
-
+		
 	if (entry.flag == EXACT
 		|| entry.flag == L_BOUND && entry.evaluationScore >= beta
 		|| entry.flag == U_BOUND && entry.evaluationScore <= alpha) {
@@ -128,7 +128,7 @@ void MovePicker::moveGenerator() {
 	for (int i = 0; i < 7; i++) {
 		int lowestFreeInCol = board.get_height(i);
 		if (lowestFreeInCol - 7 * i <= 5) {
-			int score = (CENTRAL_COLUMN_SCORE - DISTANCE_PENALTY * abs(i - 3));
+			int score = positionScore[i];
 			if (hashMove != NO_MOVE && lowestFreeInCol == hashMove) {
 				score += HASH_MOVE_SCORE;
 			}
